@@ -22,11 +22,12 @@
     let newDiv = document.createElement("div");
         newDiv.innerHTML = "<h1>Привет!</h1>";  
         newDiv.className = "Ctrl Shift Delete";
-        newDivNode.classList.add('newClass');
-        newDivNode.classList.remove('Delete');
-        newDivNode.classList.toggle('Command');
+        newDiv.classList.add('newClass');
+        newDiv.classList.remove('Delete');
+        newDiv.classList.toggle('Command');
 
-    document.target.appendChild( newDiv )
+    target.appendChild( newDiv );
+    console.log(target);
 
 
  
