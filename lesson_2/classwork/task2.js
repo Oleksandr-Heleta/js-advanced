@@ -55,10 +55,13 @@
 
    const hoverResult = document.getElementById('hoverResult');
    const clickResult = document.getElementById('hoverResult');
-
+   const lightResult = document.getElementById('lightResult');
+   const keyboardResult = document.getElementById('keyboardResult'); 
+   
    const hoverArr = ['red', 'blue', 'green', 'orange', 'purple'];
    const onclickFirstArr = ['six', 'two', 'three', 'four', 'one', 'five'];
    const onclickSecondArr = ['one', 'two', 'three', 'four', 'five', 'six'];
+   const lightArr = ['Off', 'Red', 'Yellow', 'Green'];
 
 //    ---task1---
    mouseHover.onmouseenter = function(){
@@ -72,7 +75,7 @@
    }
 
 //    ---task2---   
-   var clickIndex = 0;
+   
    var direction = true;
 
    mouseClick.onclick = function(){
@@ -82,11 +85,48 @@
    }
 
 //    ---task3---
-   mouseLight.onclick = function(e){
-       console.log('light');
+  var clickIndex = 0;
+   mouseLight.onclick = function(){
+    lightResult.className = `resultBlock ${lightArr[clickIndex]}`;
+    lightResult.innerText = lightArr[clickIndex];
+    clickIndex++;
+    if (clickIndex > lightArr.length - 1) clickIndex = 0;
+  
+      //  console.log(lightResult);
    }
 
+
+//  ---task4---
    var counter = 0;
    keyboardButton.onkeydown = function(){
+    counter++;
+    keyboardResult.innerText = counter;
+    const numbers = counter.toString().split("");
+    const strings = numbers.map(function (e){
+      switch (e){
+          case "0" :
+            return "zero";
+          case "1" :
+            return "one";
+          case "2" :
+            return "two";
+          case "3" :
+            return "tree";
+          case "4" :
+            return "four";
+          case "5" :
+            return "five";
+          case "6" :
+             return "six";
+          case "7" :
+            return "sewen";
+          case "8" :
+            return "eight";
+          case "9" :
+             return "nine";
+      }
+    })
+
+    
        console.log('keydown');
    }

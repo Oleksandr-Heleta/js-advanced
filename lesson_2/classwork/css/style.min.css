@@ -227,3 +227,19 @@ ul.resultBlock{
   background: #2196f3;
   color: #fff;
 }
+
+.Off{
+  color: black;
+}
+.Red{
+  background: red;
+  color: white;
+}
+.Yellow{
+  background: yellow;
+  color: black;
+}
+.Green{
+  background: green;
+  color: white;
+}
