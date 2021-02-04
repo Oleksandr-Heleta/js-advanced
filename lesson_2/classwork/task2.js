@@ -54,7 +54,7 @@
    const keyboardButton = document.getElementById('keyboardButton');
 
    const hoverResult = document.getElementById('hoverResult');
-   const clickResult = document.getElementById('hoverResult');
+   const clickResult = document.getElementById('clickResult');
    const lightResult = document.getElementById('lightResult');
    const keyboardResult = document.getElementById('keyboardResult'); 
    
@@ -62,6 +62,7 @@
    const onclickFirstArr = ['six', 'two', 'three', 'four', 'one', 'five'];
    const onclickSecondArr = ['one', 'two', 'three', 'four', 'five', 'six'];
    const lightArr = ['Off', 'Red', 'Yellow', 'Green'];
+   const zeroToNine = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
 //    ---task1---
    mouseHover.onmouseenter = function(){
@@ -75,13 +76,28 @@
    }
 
 //    ---task2---   
-   
+   let click = 0;
    var direction = true;
 
    mouseClick.onclick = function(){
-
+      if (direction){
+        clickResult.classList.remove(onclickFirstArr[click]);
+        click++;
+        if (click === 6) {
+          direction = false;
+          click = 0;
+        }
+      } else {
+        clickResult.classList.add(onclickSecondArr[click]);
+        click++;
+        if (click === 6) {
+          direction = true;
+          click = 0;
+        }
+      }
 
        console.log('click');
+       console.log(clickResult.classList);
    }
 
 //    ---task3---
@@ -98,6 +114,15 @@
 
 //  ---task4---
    var counter = 0;
+
+   function clearClasses(arr) {
+      arr.forEach((el) => {
+       if (keyboardResult.classList.contains(el)) {
+        keyboardResult.classList.remove(el)
+       }
+     })
+   }
+
    keyboardButton.onkeydown = function(){
     counter++;
     keyboardResult.innerText = counter;
@@ -111,7 +136,7 @@
           case "2" :
             return "two";
           case "3" :
-            return "tree";
+            return "three";
           case "4" :
             return "four";
           case "5" :
@@ -119,14 +144,19 @@
           case "6" :
              return "six";
           case "7" :
-            return "sewen";
+            return "seven";
           case "8" :
             return "eight";
           case "9" :
              return "nine";
       }
     })
-
     
-       console.log('keydown');
-   }
+    clearClasses( zeroToNine);
+
+    strings.forEach( (e) => {
+      keyboardResult.classList.add(e)
+    })
+    
+      //  console.log( keyboardResult.classList);
+   };
