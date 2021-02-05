@@ -51,6 +51,6 @@ body{
 }
 
 .loadedImage{
-  transform: rotate(390deg);
-  transition: 0.5s;
+  
+  transition: 2s;
 }

@@ -20,3 +20,32 @@
 
   var OurSliderImages = ['images/cat1.jpg', 'images/cat2.jpg', 'images/cat3.jpg', 'images/cat4.jpg', 'images/cat5.jpg', 'images/cat6.jpg', 'images/cat7.jpg', 'images/cat8.jpg'];
   var currentPosition = 0;
+
+  // Получаем доступ к елементам
+  const slider = document.getElementById('slider');
+  const sliderControls = document.getElementById('SliderControls');
+  const img = document.createElement('img');
+
+  // Функция при загрузке страницы
+  window.onload = function() { 
+    
+    img.src = OurSliderImages[0];
+    img.alt = "it happens";
+    // img.classList.add("loadedImage");
+    slider.appendChild(img);
+  }
+
+  // Функция Слайдера
+  sliderControls.addEventListener('click', function(e){
+    let btn = e.target;
+    let btnId = btn.getAttribute("id");
+    if (btnId === "PrevSilde") {
+      currentPosition--;
+      if (currentPosition < 0 ) currentPosition = OurSliderImages.length - 1; 
+    } else {
+      currentPosition++;
+      if (currentPosition > OurSliderImages.length - 1 ) currentPosition = 0;
+    }
+
+    img.src = OurSliderImages[currentPosition];
+  }) 
