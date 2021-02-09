@@ -52,9 +52,9 @@ var windHeight = document.documentElement.clientHeight;
 var r = getRandomIntInclusive(0, 255);
 var g = getRandomIntInclusive(0, 255);
 var b = getRandomIntInclusive(0, 255);
-console.log('rgb(' + r, g, b + ')');
+// console.log('rgb(' + r, g, b + ')');
 var color = `rgb(${r},${g},${b})`;
-console.log(color);
+// console.log(color);
 
 // Получаем доступ к елементу с id = app
 var app = document.querySelector('#app');
@@ -93,6 +93,16 @@ colorBox.addEventListener('click', function(){
   RR = RR.toString(16);
   BB = BB.toString(16);
   GG = GG.toString(16);
+  // console.log(typeof RR);
+
+  function checkNumber(e) {
+    if (e.length === 1) return e = "0" + e;
+  else return e;
+  }
+  RR = checkNumber(RR);
+  BB = checkNumber(BB);
+  GG = checkNumber(GG);
+
   console.log(RR, GG, BB);
   colorBox.style.backgroundColor = `#${RR}${GG}${BB}`;
    });
