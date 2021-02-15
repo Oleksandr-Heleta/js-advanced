@@ -4,7 +4,7 @@
 
         Документация:
         
-        https://developer.mozilla.org/ru/docs/HTML/HTML5/Constraint_validation
+        https://developer.mozilla.org/ru/docs/HTML/HT   ML5/Constraint_validation
         
         form.checkValidity() > Проверка всех полей формы на валидость
         form.reportValidity() > Проверяет все поля на валидность и выводит сообщение с ошибкой
