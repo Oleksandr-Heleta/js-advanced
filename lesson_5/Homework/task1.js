@@ -68,7 +68,7 @@ const createComentsList = function (arr){
        <img class="img" src=${element.avatarUrl} />
     </div>
     <div class="text" >
-      <span> ${element.name} : </span><span> ${element.text}  </span><span> Like: ${element.like}  </span>
+      <span> ${element.name} : </span><span> ${element.text}  </span><br/><span> Like: ${element.like}  </span>
     </div>`;
     comentBlock.className = 'comentBlock';
     wrapper.appendChild(comentBlock)
