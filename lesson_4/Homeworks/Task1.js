@@ -45,3 +45,54 @@
             - yourForm.reportValidity: вызывает проверку всех правил и вывод сообщения с ошибкой, если такая есть
 
     */
+    const myForm = document.getElementById('mainForm');   
+    const submitBtn = document.getElementById('submitBtn');
+    const validateBtn = document.getElementById('validateBtn');
+
+        const cleanValidationMessage = function() {
+            let arrOfInputs = Array.from(myForm.elements);
+            arrOfInputs.forEach( item => {
+                item.setCustomValidity('');
+            })
+        }
+
+        
+        const checkForm = function(e) {
+            cleanValidationMessage();
+
+            if (myForm.userName.value.length === 0){
+                myForm.userName.setCustomValidity("Как тебя зовут дружище?!");
+            } 
+
+            if (!myForm.userEmail.validity.valid) {
+                myForm.userEmail.setCustomValidity('Ну и зря, не получишь бандероль с яблоками!');
+            }
+
+            if (!myForm.userPassword.validity.valid) {
+                myForm.userPassword.setCustomValidity('Я никому не скажу наш секрет');
+            }
+
+            if (!myForm.appleCount.validity.valid) {
+                myForm.appleCount.setCustomValidity('Ну хоть покушай немного... Яблочки вкусные');
+            }   
+
+            if (myForm.blockThanks.value !== 'спасибо'){
+                myForm.blockThanks.setCustomValidity("Фу, неблагодарный(-ая)!");
+            }
+
+            if (!myForm.agreeToStudy.validity.valid) {
+                myForm.agreeToStudy.setCustomValidity('Необразованные живут дольше! Хорошо подумай!');
+            }
+        }
+
+        submitBtn.addEventListener('click', checkForm);
+
+        myForm.validateBtn.addEventListener('click', function(){
+            if(!myForm.checkValidity()){
+                alert('please provide correct info');
+            } else {
+                alert('Good job, the form is good to be submitted');
+            } 
+            checkForm();
+            myForm.reportValidity() ;  
+        });

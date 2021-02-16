@@ -21,8 +21,26 @@
     color: 'white'
   }
 
-  // fucntion myCall( color ){
-  //   document.body.style.background = this.background;
-  //   document.body.style.color = color;
-  // }
+  function myCall( color ){
+    document.body.style.background = this.background;
+    document.body.style.color = color;
+  }
   // myCall.call( colors, 'red' );
+
+  function myBind (){
+    document.body.style.background = this.background;
+    document.body.style.color = this.color;
+  }
+
+  const funcBind = myBind.bind(colors);
+  // funcBind();
+
+
+  const h = document.getElementById('task2')
+  function myApply (text){
+    h.innerText = text;
+    h.style.background = this.background;
+    h.style.color = this.color;
+  }
+
+  myApply.apply(colors, ["I know how binding works in JS"]);
