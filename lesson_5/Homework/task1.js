@@ -28,9 +28,9 @@
 */
 //  Конструктор обьекта:
 function Comment (name, text, avatarUrl ) {
-  this.name = name,
-  this.text = text,
-  this.avatarUrl = avatarUrl,
+  this.name = name;
+  this.text = text;
+  if(avatarUrl) this.avatarUrl = avatarUrl;
   this.like = 0
 }
 // Прототип для Обьектов
@@ -58,7 +58,7 @@ const myComment4 = new Comment('user4', 'sow sow');
 // myComment4.addLike();
 // myComment4.addLike();
 // myComment4.addLike();
-delete myComment4.avatarUrl;
+// delete myComment4.avatarUrl;
 // console.log(myComment4);
 
 // Масив обьектов
