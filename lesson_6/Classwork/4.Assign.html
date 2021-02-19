@@ -7,11 +7,11 @@
 </head>
 <body>
   <div class="wrap">
-      <div class="assigned">
+      <div id="1" class="assigned">
         <form class="ObjForm">
             <input name="key" placeholder="Enter your key"/>
             <input name="value" placeholder="Enter your value"/>
-            <button type="submit">Send</button>
+            <button name="btn" type="submit">Send</button>
         </form>
         <div class="createResult">
           <header>
@@ -19,21 +19,19 @@
           </header>
           <div class="createdObj">
             <code>
-              {
-                id:123,
-                b:'test',
-                demo:'test2'
+              { <ul></ul>
+                
               }
             </code>
           </div>
         </div>
       </div>
 
-      <div class="assigned">
+      <div id="2" class="assigned" >
         <form class="ObjForm">
             <input name="key" placeholder="Enter your key"/>
             <input name="value" placeholder="Enter your value"/>
-            <button type="submit">Send</button>
+            <button name="btn" type="submit">Send</button>
           </form>
           <div class="createResult">
             <header>
@@ -41,10 +39,8 @@
             </header>
             <div class="createdObj">
               <code>
-                {
-                  id:123,
-                  b:'test',
-                  demo:'test2'
+                { <ul></ul>
+                  
                 }
               </code>
             </div>
@@ -52,7 +48,7 @@
       </div>
     </div>
     <div class="resultBlock">
-       <button>Combine Objects!</button>
+       <button id="combineObj">Combine Objects!</button>
       <h3> Result: </h3>
       <div id="result"></div>
     </div>
@@ -78,6 +74,13 @@
         }
         .createResult header{
           font-weight: 700;
+        }
+        li{
+          padding: 0px;
+          list-style: none;
+        }
+        ul{
+              padding-inline-start: 0px;
         }
       </style>
 </body>
