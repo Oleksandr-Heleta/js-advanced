@@ -55,7 +55,15 @@ class SuperDude {
     { name:'superSight', spell: function(){ return `${this.name} see you`} },
     { name:'superFroze', spell: function(){ return `${this.name} will froze you`} },
     { name:'superSkin',  spell: function(){ return `${this.name} skin is unbreakable`} },
-  ];
+];
+  
+function Spell(name, spellFunc) {
+  this.name = name;
+  this.spell = spellFunc;
+  superPowers.push(this);
+}
+
+let fly = new Spell ('Fly', function(){ return `${this.name} will fly to the sky`})
 
 let Luther = new SuperDude('Luther', superPowers);
   console.log(Luther);
@@ -65,4 +73,7 @@ let Luther = new SuperDude('Luther', superPowers);
       Luther.superFroze();
       Luther.Invisibility();
       Luther.superSkin();
+      Luther.Fly();
+      
+      
 

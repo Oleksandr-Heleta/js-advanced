@@ -67,7 +67,8 @@ class Message  {
 
         messages.push(this);
         this.skipMessage = this.skipMessage.bind(this);
-        let SendAnswer = this.SendAnswer.bind(this);
+        this.answerMessage = this.answerMessage.bind(this);
+        this.SendAnswer = this.SendAnswer.bind(this);
       }
 
       render () {
@@ -87,6 +88,7 @@ class Message  {
               <button class="_skipMessage">Skip</button>
               <button class="_answerMessage">Answer</button>
             </div>
+            <ul class="answer_list"></ul>
             `;
         const skipMessageBtn = messageListItem.querySelector('._skipMessage');
               skipMessageBtn.addEventListener('click', this.skipMessage );
@@ -95,7 +97,7 @@ class Message  {
         messageListItem.setAttribute('id', this.id);
              
 
-              console.log(this.id);
+              // console.log(this.id);
               
         messageList.appendChild(messageListItem);
       }  
@@ -109,11 +111,12 @@ class Message  {
       }
       
       answerMessage(){
-        // this.answers = answers; 
-        const messageList = document.getElementById('message_list');
+        
+        const messageListItem = document.getElementById(this.id);
+        const answerList = messageListItem.querySelector('.answer_list');
         let answerListItem = document.createElement('li');
         answerListItem.innerHTML = `
-        <form id="${this.id}">
+        <form >
         <label for="author">
           <span>Author</span>
           <select id="author" name="author">
@@ -135,17 +138,16 @@ class Message  {
         const answerForm = answerListItem.querySelector('form');
         
         
-        // answerForm.answerBtn.addEventListener('click', this.SendAnswer);
         answerForm.answerBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          console.log(this);
-          SendAnswer();
+          this.SendAnswer();
         });
-      messageList.appendChild(answerListItem);
+      answerList.appendChild(answerListItem);
       }
   
       SendAnswer() {
-       
+        const messageListItem = document.getElementById(this.id);
+        const answerForm = messageListItem.querySelector('form');
         let id = idCount;
         idCount++;
         let author = answerForm.author.value;
@@ -156,8 +158,8 @@ class Message  {
 
         let answers = new Answers(id, author, text, date, parentId);
         this.answers = answers;
-        console.log(answers);
-        answerListItem.remove();
+        // console.log(answers);
+        answerForm.parentNode.remove();
         answers.render();
       }
   
@@ -204,4 +206,36 @@ class Answers extends Message {
     
     this.parentId = parentId;
   }
+
+   render () {
+        const messageListItem = document.getElementById(this.parentId);
+        const answerList = messageListItem.querySelector('.answer_list');
+        let answerListItem = document.createElement('li');
+            answerListItem.innerHTML = `
+            <div class="message__date">
+              ${this.date}
+            </div>
+            <div class="message__author">
+              <b>${this.author}</b>
+            </div>
+            <div class="message__text">
+              ${this.text}
+            </div>
+            <div class="message__controls">
+              <button class="_skipMessage">Skip</button>
+              <button class="_answerMessage">Answer</button>
+            </div>
+            <ul class="answer_list"></ul>
+            `;
+        const skipMessageBtn = answerListItem.querySelector('._skipMessage');
+              skipMessageBtn.addEventListener('click', this.skipMessage );
+        const answerMessageBtn = answerListItem.querySelector('._answerMessage');
+              answerMessageBtn.addEventListener('click', this.answerMessage );
+        answerListItem.setAttribute('id', this.id);
+             
+
+              // console.log(this.id);
+              
+        answerList.appendChild(answerListItem);
+      }  
 }
