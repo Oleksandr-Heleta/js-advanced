@@ -67,7 +67,7 @@ class Message  {
 
         messages.push(this);
         this.skipMessage = this.skipMessage.bind(this);
-        // this.SendAnswer = this.SendAnswer.bind(this)
+        let SendAnswer = this.SendAnswer.bind(this);
       }
 
       render () {
@@ -108,7 +108,7 @@ class Message  {
         messages.splice(index, 1);
       }
       
-      answerMessage(e){
+      answerMessage(){
         // this.answers = answers; 
         const messageList = document.getElementById('message_list');
         let answerListItem = document.createElement('li');
@@ -134,13 +134,18 @@ class Message  {
         `;
         const answerForm = answerListItem.querySelector('form');
         
-        // answerForm.answerBtn.addEventListener('click', (e) => e.preventDefault());
-        answerForm.answerBtn.addEventListener('click', this.SendAnswer);
+        
+        // answerForm.answerBtn.addEventListener('click', this.SendAnswer);
+        answerForm.answerBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          console.log(this);
+          SendAnswer();
+        });
       messageList.appendChild(answerListItem);
       }
   
-      SendAnswer(e) {
-        e.preventDefault();
+      SendAnswer() {
+       
         let id = idCount;
         idCount++;
         let author = answerForm.author.value;
