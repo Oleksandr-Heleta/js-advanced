@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forms Task 1</title>
+  <script>
+    /*
+      Задание:
+        Сделать валидацию формы:
+        1. Логин / Пароль не может быть пустым
+        2. то поле, которое не прошло валидацию подсвечивать красным, которое прошло - подсвечивать зеленым.
+        3. Пока не стоит что юзер согласен с лиц. соглашением - кнопка отправки не активна
+    */
+  </script>
+</head>
+<body>
+  <form id="MyValidateForm">
+    <input type="text" name='login' placeholder="Ваш логин" />
+    <input type="password" name='pas1' placeholder="Ваш пароль" />
+    <input type="password" name='pas2' placeholder="Повторите пароль" />
+    <label for="agree">
+      <span>Вы согласны с лицензионым соглашением.</span>
+      <input type="checkbox" id="agree" />
+    </label>
+    <input type="submit" id="submit" value="Отправить" disabled/>
+  </form>
+
+  <style>
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .error{
+        border: 1px solid red;
+    }
+    .OK{
+        border: 1px solid green;
+    }
+  </style>
+  <script>
+    const form = document.getElementById('MyValidateForm');
+    const btn = document.getElementById('submit');
+    const checkAgree = document.getElementById('agree');
+    
+    checkAgree.addEventListener('change', activeBtn)
+   
+
+    function activeBtn() {
+      if( checkAgree.checked){
+         btn.disabled = false;
+         form.addEventListener('submit', validFunc);
+      } else {
+        btn.disabled = true;
+        form.removeEventListener('submit', validFunc)
+      }
+    };
+
+    function validFunc(e) {
+      e.preventDefault();
+      let flag = true;
+
+      if (form.login.value === "") {
+        flag = false;
+        form.login.classList.remove('OK');
+        form.login.classList.add('error');
+        const loginAlert = alert('Please, enter you login');
+
+      } else {
+        flag = true;
+        form.login.classList.add('OK');
+      }
+
+      if (form.pas1.value === "") {
+        flag = false;
+        form.pas1.classList.remove('OK');
+        form.pas1.classList.add('error');
+        const loginAlert = alert('Please, enter you password');
+
+      } else {
+        flag = true;
+        form.pas1.classList.add('OK');
+      }
+
+      if (form.pas2.value === "") {
+        flag = false;
+        form.pas2.classList.remove('OK');
+        form.pas2.classList.add('error');
+        const loginAlert = alert('Please, enter you password');
+
+      } else {
+        flag = true;
+        form.pas2.classList.add('OK');
+      }
+
+      if (form.pas1.value !== form.pas2.value) {
+        flag = false;
+        form.pas2.classList.add('error');
+        form.pas2.classList.remove('OK');
+        const loginAlert = alert('Please, check you password');
+      } else {
+        flag = true;
+        form.pas2.classList.add('OK');
+      }
+
+      if (flag) {
+        console.log(`add user ${form.login.value} with password ${form.pas1.value}!`);
+      }
+    }
+
+  </script>
+</body>
+</html>
