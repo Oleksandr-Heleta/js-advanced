@@ -11,13 +11,14 @@ function getRandomIntInclusive(min, max) {
 const writeInput = document.getElementById('newToDo');
 const addLi = document.getElementById('AddToDo');
 const toDoList = document.getElementById('toDoList');
+const url = 'http://localhost:3000/posts';
 
 window.addEventListener('load', renderList);
 addLi.addEventListener('click', liCreate);
 
 // Создание списка при загрузке
 function renderList() {
-    fetch('http://localhost:3000/posts')
+    fetch(url)
     .then(
       (res) => {
         console.log(res);
@@ -28,9 +29,9 @@ function renderList() {
       (res) => {
         res.forEach( item => {
             
-            item.prototype = ToDo;
+            let rendToDo = new ToDo(item.id, item.statusDone, item.text);
             console.log(item);
-            item.render();  // Почему не рендерит ведь у него в прототипе есть эта функция
+            rendToDo.render();  
         })
       }
     )
@@ -73,35 +74,13 @@ class ToDo {
         // console.log(liText);
         liText.classList.add('done');
         this.statusDone = true;
-         fetch('http://localhost:3000/posts')  // Почему статус меняет но закидывает еще одну копию
-        .then(
-        (res) => {
-            console.log(res);
-            return res.json();
-         }
-        )
-        .then( 
-        (res) => {
-            res.forEach( item => {
-                if (item.id === this.id) {
-                    item.statusDone = true;
-                }
-            })
-            let jsonData = JSON.stringify(res);
-            return jsonData;
-         }
-        )
-        .then(
-        (res) => {
-           fetch('http://localhost:3000/posts', {
-                method: "POST",
-                body: res,
-                headers: {
+        fetch(`${url}/${this.id}`, {
+            method: "PUT",
+            headers: {
                 "Content-Type": "application/json"
-                }
-            }) 
-         }
-        )
+            },
+            body: JSON.stringify(this)
+        });
 
     }
 
@@ -110,35 +89,12 @@ class ToDo {
         const li = e.target.closest("li");
         // console.log(li);
         toDoList.removeChild(li);
-         fetch('http://localhost:3000/posts')  // Почему не удалает но закидывает еще копию
-        .then(
-        (res) => {
-            console.log(res);
-            return res.json();
-         }
-        )
-        .then( 
-        (res) => {
-            res.forEach( item => {
-                if (item.id === this.id) {
-                   res.splice(res.indexOf(item), 1);
-                }
-            })
-            let jsonData = JSON.stringify(res);
-            return jsonData;
-         }
-        )
-        .then(
-        (res) => {
-           fetch('http://localhost:3000/posts', {
-                method: "POST",
-                body: res,
-                headers: {
-                "Content-Type": "application/json"
-                }
-            }) 
-         }
-        )
+        fetch(`${url}/${this.id}`, {
+		method: "DELETE",
+		headers: {
+				"Content-Type": "application/json"
+		    }
+	    });
         delete this;
     }
 

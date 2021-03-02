@@ -1,34 +1,17 @@
 {
   "posts": [
     {
-      "id": 98811632,
-      "statusDone": false,
-      "text": "111111"
+      "id": 65609441,
+      "statusDone": true,
+      "text": "впвпвп"
     },
-    [
-      {
-        "id": 98811632,
-        "statusDone": true,
-        "text": "111111"
-      }
-    ],
-    [
-      [
-        {
-          "id": 98811632,
-          "statusDone": true,
-          "text": "111111"
-        }
-      ]
-    ]
-  ],
-  "comments": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 95570828,
+      "statusDone": true,
+      "text": "ghmfymy"
     }
   ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }

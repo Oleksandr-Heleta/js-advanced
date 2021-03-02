@@ -20,6 +20,8 @@
     - Можно было предзагрузить данные в класс из апи: http://www.json-generator.com/api/json/get/cgCRXqNTtu?indent=2
 
 */
+window.addEventListener('load', renderList)
+let posts = [];
 
 class Posts  {
     constructor(id, isActive, title, about, likes, created_at){
@@ -32,16 +34,21 @@ class Posts  {
       this.created_at = created_at; 
      
       this.addLike = this.addLike.bind(this);
-    //   this.render();
-      localStorage.setItem(this._id, JSON.stringify(this) );
+      this.render();
     }
 
     addLike(e) {
-        localStorage.removeItem(this._id);
+        
         this.likes ++;
         const span = e.target.parentNode.querySelector('span');
         span.innerText = `${this.likes}`;
-        localStorage.setItem(this._id, JSON.stringify(this) );
+        posts.forEach( post => {
+            if (post._id === this._id) {
+                post.likes = this.likes;
+            }
+        });
+
+        localStorage.setItem('posts', JSON.stringify(posts));
     };
     render() {
         const postList = document.getElementById('post_list');
@@ -71,9 +78,20 @@ class Posts  {
 
 const form = document.getElementById('create_list');
 const ul = document.getElementById('post_list');
+const loadPostsBtn = document.getElementById('_loadPostsBtn');
 
 form.send.addEventListener('click', createPost);
+loadPostsBtn.addEventListener('click', fetchPost);
 
+function renderList() {
+  let postsLS = GetSavedPosts();
+
+  if (postsLS !== null) {
+    postsLS.forEach(post => {
+      let newPost = new Posts(post._id, post.isActive, post.title, post.about, post.likes, post.created_at);
+    })
+  }
+}
 
 function createPost(e) {
     e.preventDefault();
@@ -84,7 +102,12 @@ function createPost(e) {
     let isActive = true;
     let id = getRandomIntInclusive(0, 100000000);
     let post = new Posts(id, isActive, title, about, likes, created_at);
-    post.render();
+    
+    posts.push(post);
+
+    localStorage.setItem('posts', JSON.stringify(posts));
+    form.title.value = "";
+    form.about.value = "";
 }
 
 function getRandomIntInclusive(min, max) {
@@ -95,15 +118,56 @@ function getRandomIntInclusive(min, max) {
 
 function getDay()  {
     let dateObj = new Date();
-    let day = dateObj.getDate();
-    let month = dateObj.getMonth();
-    month++; 
-    let year = dateObj.getFullYear();
-    day.toString();
-    month.toString();
-    if (day < 10) {day = `0${day}` };
-    if (month < 10) {month = `0${month}` };
-    // console.log(typeof (month));
-    let date = `${year}-${month}-${day}`;
-    return date;
+    // let day = dateObj.getDate();
+    // let month = dateObj.getMonth();
+    // month++; 
+    // let year = dateObj.getFullYear();
+    // day.toString();
+    // month.toString();
+    // if (day < 10) {day = `0${day}` };
+    // if (month < 10) {month = `0${month}` };
+    // // console.log(typeof (month));
+    // let date = `${year}-${month}-${day}`;
+    return dateObj;
   }
+
+
+
+async function fetchPost() {
+    let respone = await fetch('http://www.json-generator.com/api/json/get/cgCRXqNTtu?indent=2');
+    let json = await respone.json();
+
+    let currentPosts = GetSavedPosts();
+
+    if (currentPosts !== null) {
+        let uniquePosts = json.filter(function(obj) {
+            return !currentPosts.some(function(obj2) {
+                return obj._id == obj2._id;
+            });
+        });
+    
+        uniquePosts.forEach(post => {
+            let newPost = new Posts(post._id, post.isActive, post.title, post.about, 0, post.created_at);   
+            posts.push(newPost); 
+        });
+    } else {
+        json.forEach(post => {
+            let newPost = new Posts(post._id, post.isActive, post.title, post.about, 0, post.created_at);   
+            posts.push(newPost);
+        })
+    }
+
+    localStorage.setItem('posts', JSON.stringify(posts));
+}
+
+function GetSavedPosts() {
+    let data = localStorage.getItem('posts');
+
+    if (data !== null) {
+        posts = JSON.parse(data);
+        return posts;
+    }
+
+    return null;
+}
+
