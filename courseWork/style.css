@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ededed;
+  max-width: 1078px;
+  margin: 0 auto;
+}
+.main {
+  flex-grow: 1;
+  max-width: 55%;
+  background-color: #ffffff;
+  padding: 40px;
+  margin: 20px;
+}
+.author_date {
+  display: flex;
+  justify-content: space-between;
+}
+.likes_comments {
+  display: flex;
+  justify-content: space-between;
+}
+.likes {
+  background-color: #7dedf8;
+  color: #1d71b9;
+}
+.aside {
+  flex-grow: 1;
+
+  max-width: 40%;
+  background-color: #ffffff;
+  padding: 40px 20px;
+  margin: 20px;
+}
+.form {
+}
+.preview {
+  width: 100%;
+  min-height: 100px;
+}
+
+.btn_send {
+  width: 100%;
+  background-color: #ffcc00;
+}
+li {
+  list-style-type: none; /* Убираем маркеры */
+}
+ul {
+  margin-left: 0; /* Отступ слева в браузере IE и Opera */
+  padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+}
