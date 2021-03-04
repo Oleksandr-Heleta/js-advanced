@@ -2,12 +2,12 @@
   display: flex;
   justify-content: space-around;
   background-color: #ededed;
-  max-width: 1078px;
+  /* max-width: 1078px; */
   margin: 0 auto;
 }
 .main {
   flex-grow: 1;
-  max-width: 55%;
+  max-width: 50%;
   background-color: #ffffff;
   padding: 40px;
   margin: 20px;
@@ -27,12 +27,14 @@
 .aside {
   flex-grow: 1;
 
-  max-width: 40%;
+  max-width: 45%;
   background-color: #ffffff;
   padding: 40px 20px;
   margin: 20px;
 }
 .form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 .preview {
   width: 100%;
@@ -49,4 +51,8 @@ li {
 ul {
   margin-left: 0; /* Отступ слева в браузере IE и Opera */
   padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+}
+textarea input {
+  display: inline-block;
+  width: 100%;
 }

@@ -11,7 +11,7 @@
     <div class="wrapper">
         <main class="main">
             <h2>News Feed</h2>
-            <ul>
+            <ul id="post_lists">
                 <li>
                     <div class="author_date">
                         <div class="author">
@@ -46,12 +46,12 @@
                         </div>
                         </li>
                     </ul>
-                    <form class="form" id="create_post">
+                    <form class="comment_form" id="create_comment">
                         <input type="text" placeholder="Author"  id="author_inp" name="author">
                         <br>
                         <textarea placeholder="Comment" id="about_inp" name="about"></textarea>
                         <br>
-                        <button class="btn_send" name="send">Send Post</button>
+                        <button class="btn_send" name="send_coment">Send Post</button>
                     
                     </form>
 
@@ -64,15 +64,15 @@
             <form class="form" id="create_post">
                 <label for="title_inp">Author</label>
                 <input type="text" id="author_inp" name="author">
-                <br>
+               
                 <label for="about_inp">Post text </label>
-                <textarea placeholder="Your Message" id="about_inp" name="about"></textarea>
+                <textarea placeholder="Your Message" id="about_inp" name="text"></textarea>
                 <br>
-                <img class="preview" src="#" alt="#">
-                <br>
+                <img class="preview"  src="#" alt="#">
+              
                 <label for="img_inp">Image URL</label>
-                <input type="text" id="img_inp" name="imageURl"><button type="button" id="loadImg">Load Image</button>
-                <br>
+                <span><input type="text" id="img_inp" name="imageURl"><button id="loadImg" >Load Image</button></span>
+            
                 <button class="btn_send" name="send">Send Post</button>
                 
             </form>
