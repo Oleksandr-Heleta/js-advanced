@@ -12,7 +12,7 @@
         <main class="main">
             <h2>News Feed</h2>
             <ul id="post_lists">
-                <li>
+                <li class="post_item">
                     <div class="author_date">
                         <div class="author">
                             author
@@ -21,8 +21,8 @@
                             date
                         </div>
                     </div>
-                    <img src="#" alt="#">
-                    <div class="post_text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur est doloribus saepe alias doloremque, maxime repudiandae officia, ut, nobis id aliquam voluptatem quidem. Dicta aperiam nobis culpa a nam qui?</div>
+                    <img class="post_img" src="https://cc-prod.scene7.com/is/image/CCProdAuthor/draw-trees_P1_900x420?$pjpeg$&jpegSize=200&wid=900" alt="#">
+                    <div class="post_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit corrupti quod accusantium est. Facere, accusamus voluptate corrupti, veritatis autem blanditiis eos quod quidem quo sapiente impedit soluta, ratione modi rem!   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur est doloribus saepe alias doloremque, maxime repudiandae officia, ut, nobis id aliquam voluptatem quidem. Dicta aperiam nobis culpa a nam qui?</div>
                     <div class="likes_comments">
                         <button class="likes">Likes</button>
                         <div>
@@ -68,8 +68,9 @@
                 <label for="about_inp">Post text </label>
                 <textarea placeholder="Your Message" id="about_inp" name="text"></textarea>
                 <br>
-                <img class="preview"  src="#" alt="#">
-              
+                <div class="preview">
+                    <img class="preview_img"  src="#" alt="#">
+                </div>
                 <label for="img_inp">Image URL</label>
                 <span><input type="text" id="img_inp" name="imageURl"><button id="loadImg" >Load Image</button></span>
             
