@@ -42,16 +42,13 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 	color: red;
 }
 /* style */
-.wrapper {
-  display: flex;
-  justify-content: space-around;
+body {
   background-color: #ededed;
-  /* max-width: 1078px; */
   margin: 0 auto;
 }
 .main {
-  flex-grow: 1;
-  max-width: 50%;
+  
+  max-width: 60%;
   background-color: #ffffff;
   padding: 40px;
   margin: 20px;
@@ -70,6 +67,9 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
   font-size: 20px;
 
 }
+.date{
+  color:darkgrey;
+}
 .post_img{
   margin-bottom: 20px;
 }
@@ -84,18 +84,32 @@ button{
   padding: 5px 10px;
 }
 .likes {
-  background-color: #7dedf8;
-  color: #1d71b9;
-  
+
+  background-color: #1d71b9;
+  color: #000;
+  padding-left: 30px;
+  background-image: url('img/like.svg');
+  background-repeat: no-repeat;
+  background-position: 1px 1px;
+ 
 }
+/* .likes::before{
+  content: url('img/like6.png');
+  background:  #1d71b9;
+  width: 10px;
+  height: 10px;
+} */
 .comment_form{
   margin-top: 10px;
 }
 .aside {
-  flex-grow: 1;
-  position: sticky;
+ 
+  position: fixed;
+  top: 0;
+  left: 65%;
   max-width: 45%;
   background-color: #ffffff;
+  height: 100%;
   padding: 40px 20px;
   margin: 20px;
 }
@@ -122,11 +136,13 @@ img {
 .comments {
   background:  #ededed;
   padding-left: 10px; 
-  padding-bottom: 1px;
+  /* padding-bottom: 1px; */
+  margin-bottom: 20px;
 }
 .comments li{
   background: #ffffff;
   padding-left: 10px; 
+  margin-bottom: -20px;
 }
  
 input {
@@ -146,8 +162,12 @@ textarea{
   padding: 5px;
 }
 .img_inp{
-  width: 50%;
-  margin-right: 5px;
+  width: 60%;
+  margin-right: 3px;
+}
+#loadImg{
+  width: 35%;
+  padding: 5px 2px;
 }
 .comment_form{
   display: none;
@@ -169,4 +189,5 @@ h2{
 #seeMore{
   display: none;
   color: #1d71b9;
+  background: #ffffff;
 }

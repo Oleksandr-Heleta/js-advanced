@@ -12,50 +12,7 @@
         <main class="main">
             <h2>News Feed</h2>
             <ul id="post_lists">
-                <!-- <li class="post_item">
-                    <div class="author_date">
-                        <div class="author">
-                            author
-                        </div>
-                        <div class="date">
-                            date
-                        </div>
-                    </div>
-                    <img class="post_img" src="https://cc-prod.scene7.com/is/image/CCProdAuthor/draw-trees_P1_900x420?$pjpeg$&jpegSize=200&wid=900" alt="#">
-                    <div class="post_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit corrupti quod accusantium est. Facere, accusamus voluptate corrupti, veritatis autem blanditiis eos quod quidem quo sapiente impedit soluta, ratione modi rem!   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur est doloribus saepe alias doloremque, maxime repudiandae officia, ut, nobis id aliquam voluptatem quidem. Dicta aperiam nobis culpa a nam qui?</div>
-                    <div class="likes_comments">
-                        <button class="likes">Likes: 1</button>
-                        <div>
-                            <span class="comments_count">Comments(0)</span>
-                            <button>Write comment</button>
-                        </div>
-                    </div>
-                    <ul class="comments">
-                        <li>
-                        <div class="author_date">
-                            <div class="author">
-                                author
-                            </div>
-                            <div class="date">
-                                date
-                            </div>
-                        </div>
-                       
-                        <div class="post_text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur est doloribus saepe alias
-                            doloremque, maxime repudiandae officia, ut, nobis id aliquam voluptatem quidem. Dicta aperiam nobis culpa a nam qui?
-                        </div>
-                        </li>
-                    </ul>
-                    <form class="comment_form" id="create_comment">
-                        <input type="text" placeholder="Author"  id="author_inp" name="author">
-                        <br>
-                        <textarea placeholder="Comment" id="about_inp" name="about"></textarea>
-                        <br>
-                        <button class="btn_send" name="send_coment">Send Post</button>
-                    
-                    </form>
-
-                </li> -->
+                
             </ul>
             
         </main>
@@ -79,6 +36,41 @@
             </form>
         </aside>
     </div>
+    <template id="renderPost">
+        <li class="post_item">
+            <div class="author_date">
+                <div class="author">
+                   
+                </div>
+                <div class="date">
+                   
+                </div>
+            </div>
+            <img class="post_img" src="" alt="it's happend">
+            <div class="post_text">
+                <span class="text"></span>
+                <button id="seeMore">See more</button>
+            </div>
+            <div class="likes_comments">
+                <button class="likes" id="addLike">Likes: </button>
+                <div>
+                    <span class="comments_count">Comments(  )</span>
+                    <button id="openForm">Write comment</button>
+                </div>
+            </div>
+            <form class="comment_form" id="create_comment_for${this.id}">
+                <input type="text" placeholder="Author"  id="author_inp" name="author">
+                <br>
+                <textarea placeholder="Comment" id="about_inp" name="about"></textarea>
+                <br>
+                <button class="btn_send" name="send">Send Comment</button>
+        
+            </form>
+            <ul class="comments">
+                
+             </ul>
+        </li>
+    </template>
     <script src="script.js"></script>
 </body>
 </html>

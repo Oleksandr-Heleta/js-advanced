@@ -81,17 +81,18 @@ class Posts  {
                             <button id="openForm">Write comment</button>
                         </div>
                     </div>
-                    <ul class="comments">
-                        
-                     </ul>
                     <form class="comment_form" id="create_comment_for${this.id}">
                         <input type="text" placeholder="Author"  id="author_inp" name="author">
                         <br>
                         <textarea placeholder="Comment" id="about_inp" name="about"></textarea>
                         <br>
                         <button class="btn_send" name="send">Send Comment</button>
-                    
+                
                     </form>
+                    <ul class="comments">
+                        
+                     </ul>
+                   
             `;
        
         // postListItem.dataset.id = this.id;
