@@ -91,14 +91,13 @@ button{
   background-image: url('img/like.svg');
   background-repeat: no-repeat;
   background-position: 1px 1px;
- 
+   
 }
-/* .likes::before{
-  content: url('img/like6.png');
-  background:  #1d71b9;
-  width: 10px;
-  height: 10px;
-} */
+.likes:active{
+  background-color:#8492fa ;
+  
+}
+
 .comment_form{
   margin-top: 10px;
 }
@@ -132,6 +131,10 @@ img {
   width: 100%;
   background-color: #ffcc00;
 }
+.btn_send:active { 
+  background-color: #fbfd77f3;
+}
+
 
 .comments {
   background:  #ededed;
