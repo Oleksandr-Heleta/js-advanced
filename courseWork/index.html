@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="wrapper">
+        <!-- Контейнер для постов -->
         <main class="main">
             <h2>News Feed</h2>
             <ul id="post_lists">
@@ -16,6 +17,7 @@
             </ul>
             
         </main>
+        <!-- Форма для создания постов -->
         <aside class="aside">
             <h2>Post Constructor</h2>
             <form class="form" id="create_post">
@@ -36,6 +38,7 @@
             </form>
         </aside>
     </div>
+    <!-- Шаблон для ПОСТОВ -->
     <template id="renderPost">
         <li class="post_item">
             <div class="author_date">
@@ -71,6 +74,25 @@
              </ul>
         </li>
     </template>
+    <!-- Шаблон для Комментариев -->
+    <template id="renderComment">
+        <li>
+            <div class="author_date">
+                <div class="author">
+                 
+                </div>
+                <div class="date">
+                
+                </div>
+            </div>
+     
+            <div class="post_text">
+                <span class="text"></span>
+                <button id="seeMore">See more</button>
+            </div>
+        </li>
+    </template>
+    
     <script src="script.js"></script>
 </body>
 </html>

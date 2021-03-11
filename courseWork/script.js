@@ -58,59 +58,52 @@ class Posts  {
 
     // Функция отображения ПОСТОВ
     render() {
-        
-        let postListItem = document.createElement('li');
-        postListItem.innerHTML = `
-                    <div class="author_date">
-                        <div class="author">
-                            ${this.author}
-                        </div>
-                        <div class="date">
-                            ${this.date}
-                        </div>
-                    </div>
-                    <img class="post_img" src="${this.imgUrl}" alt="it's happend">
-                    <div class="post_text">
-                        <span class="text">${this.text}</span>
-                        <button id="seeMore">See more</button>
-                    </div>
-                    <div class="likes_comments">
-                        <button class="likes" id="addLike">Likes: ${this.likes}</button>
-                        <div>
-                            <span class="comments_count">Comments( ${this.countComments} )</span>
-                            <button id="openForm">Write comment</button>
-                        </div>
-                    </div>
-                    <form class="comment_form" id="create_comment_for${this.id}">
-                        <input type="text" placeholder="Author"  id="author_inp" name="author">
-                        <br>
-                        <textarea placeholder="Comment" id="about_inp" name="about"></textarea>
-                        <br>
-                        <button class="btn_send" name="send">Send Comment</button>
-                
-                    </form>
-                    <ul class="comments">
-                        
-                     </ul>
-                   
-            `;
-       
-        // postListItem.dataset.id = this.id;
-        postListItem.setAttribute('id', this.id)
-        postListItem.classList.add("post_item");
+        const t = document.getElementById('renderPost');
+        const postListItemId = t.content.querySelector('li');
+              postListItemId.setAttribute('id', this.id)
 
-        ulPosts.prepend(postListItem);
+        const author = t.content.querySelector('.author');
+              author.textContent = this.author;
+
+        const date = t.content.querySelector('.date');
+              date.textContent = this.date;
+
+        const postImg = t.content.querySelector('.post_img');
+              postImg.src = this.imgUrl;
+
+        const text = t.content.querySelector('.text');
+              text.textContent = this.text;
+        
+        const like = t.content.querySelector('#addLike');
+              like.textContent = `Likes: ${this.likes}`;
+
+        const commentsCount = t.content.querySelector('.comments_count');
+              commentsCount.textContent = `Comments( ${this.countComments} )`;
+
+        const commentForm = t.content.querySelector('.comment_form');
+              commentForm.setAttribute('id', `create_comment_for${this.id}`);
+
+        // Добавляем Пост в список
+        let clonePost = document.importNode(t.content, true);
+        ulPosts.prepend(clonePost);
+
         // Навешивание обработчиков на кнопки под постом
+        const postListItem = document.getElementById(this.id);
         const likeBtn = postListItem.querySelector('#addLike');
+              likeBtn.addEventListener('click', this.addLike );
+
         const comentFormBtn = postListItem.querySelector('#openForm');
+              comentFormBtn.addEventListener('click', this.showForm);
+
         const seeMoreBtn = postListItem.querySelector('#seeMore');
+              seeMoreBtn.addEventListener('click', this.seeMoreFunc);
+
         const commentCreateBtn = postListItem.querySelector('.btn_send');
-        likeBtn.addEventListener('click', this.addLike );
-        comentFormBtn.addEventListener('click', this.showForm);
-        commentCreateBtn.addEventListener('click', this.sendAnswer);
-        seeMoreBtn.addEventListener('click', this.seeMoreFunc);
+              commentCreateBtn.addEventListener('click', this.sendAnswer);
+        
         // Рубаем длинный текст
         this.textCut();
+        
     };
 
     // Функция создания КОММЕНТАРИЯ
@@ -119,10 +112,10 @@ class Posts  {
         const postListItem = document.getElementById(this.id);
         const commentForm = postListItem.querySelector('.comment_form');
         const commentsCount = postListItem.querySelector('.comments_count');
-         id++;
-         localStorage.setItem('idCount', JSON.stringify(id));
+        id++;
+        localStorage.setItem('idCount', JSON.stringify(id));
 
-         this.countComments++;
+        this.countComments++;
         let author = commentForm.author.value;
         let text = commentForm.about.value;
         if(author === "" || text === "") {
@@ -279,32 +272,34 @@ class Comment {
   
     // Функция отображения коментария под постом
      render () {
-          const postListItem = document.getElementById(this.parentId);
-          const commentList = postListItem.querySelector('.comments');
-          let commentListItem = document.createElement('li');
-          commentListItem.innerHTML = `
-            <div class="author_date">
-                <div class="author">
-                 ${this.author}
-                </div>
-                <div class="date">
-                ${this.date}
-                </div>
-            </div>
-     
-            <div class="post_text">
-                <span class="text">${this.text}</span>
-                <button id="seeMore">See more</button>
-            </div>
-              `;
-          commentListItem.setAttribute('id', this.id);
-          const seeMoreBtn = commentListItem.querySelector('#seeMore');
-          seeMoreBtn.addEventListener('click', this.seeMoreFunc);
+        const postListItem = document.getElementById(this.parentId);
+        const commentList = postListItem.querySelector('.comments');
+        const t = document.getElementById('renderComment');
 
-          commentList.prepend(commentListItem);
-          this.textCut();
+        let commentListItem = t.content.querySelector('li');
+            commentListItem.setAttribute('id', this.id);
 
-        };
+        const author = t.content.querySelector('.author');
+              author.textContent = this.author;
+
+        const date = t.content.querySelector('.date');
+              date.textContent = this.date;
+
+        const text = t.content.querySelector('.text');
+              text.textContent = this.text;
+
+        // Добавление Комментарий в список
+        let cloneComment = document.importNode(t.content, true);
+        commentList.prepend(cloneComment);;
+
+        //Навешивание обработчиков на кнопки
+        const seeMoreBtn = commentList.querySelector('#seeMore');
+        seeMoreBtn.addEventListener('click', this.seeMoreFunc);
+
+        // Рубаем длинный текст
+        this.textCut();
+
+    };
 
     // Функция отображения полного текста Комментария
     seeMoreFunc(e) {
@@ -328,8 +323,7 @@ class Comment {
             const commentListItem = document.getElementById(this.id);
             const seeMoreBtn = commentListItem.querySelector('#seeMore');
             const textSpan = commentListItem.querySelector('.text');
-    
-    
+        
             if( text.length <= 500) {
                 textSpan.innerText = this.text;
             } else {
@@ -338,8 +332,8 @@ class Comment {
                 seeMoreBtn.dataset.check = true;
                 textSpan.innerText = text.trim() + "...";
             }
-        }
-  };
+    }
+};
  
 
 //   Функция получения данных  с LocalStorage
