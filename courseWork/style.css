@@ -31,7 +31,7 @@ button{cursor: pointer;}
 button::-moz-focus-inner {padding:0;border:0;}
 a, a:visited{text-decoration: none;}
 a:hover{text-decoration: none;}
-ul li{list-style: none;padding-inline-start: 2px;}
+ul li{list-style: none;}
 img{vertical-align: top;}
 
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
@@ -86,11 +86,11 @@ button{
 .likes {
 
   background-color: #1d71b9;
-  color: #000;
-  padding-left: 30px;
-  background-image: url('img/like.svg');
+  color: #ffffff;
+  /* padding-left: 30px; */
+  /* background-image: url('img/like.svg');
   background-repeat: no-repeat;
-  background-position: 1px 1px;
+  background-position: 1px 1px; */
    
 }
 .likes:active{
@@ -189,7 +189,7 @@ h2{
 .form_send{
   grid-column: span 2;
 }
-#seeMore{
+.seeMore{
   display: none;
   color: #1d71b9;
   background: #ffffff;

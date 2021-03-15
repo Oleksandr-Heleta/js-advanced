@@ -21,7 +21,7 @@
         <aside class="aside">
             <h2>Post Constructor</h2>
             <form class="form" id="create_post">
-                <label for="title_inp">Author</label>
+                <label for="author_inp">Author</label>
                 <input type="text" id="author_inp" name="author">
                
                 <label for="about_inp">Post text </label>
@@ -52,19 +52,19 @@
             <img class="post_img" src="" alt="it's happend">
             <div class="post_text">
                 <span class="text"></span>
-                <button id="seeMore">See more</button>
+                <button class="seeMore">See more</button>
             </div>
             <div class="likes_comments">
-                <button class="likes" id="addLike">Likes: </button>
+                <button class="likes addLike">&#10084; Likes: <span class="like_span"> </span> </button>
                 <div>
                     <span class="comments_count">Comments(  )</span>
                     <button id="openForm">Write comment</button>
                 </div>
             </div>
             <form class="comment_form" id="create_comment_for${this.id}">
-                <input type="text" placeholder="Author"  id="author_inp" name="author">
+                <input type="text" placeholder="Author"  name="author">
                 <br>
-                <textarea placeholder="Comment" id="about_inp" name="about"></textarea>
+                <textarea placeholder="Comment"  name="about"></textarea>
                 <br>
                 <button class="btn_send" name="send">Send Comment</button>
         
@@ -88,7 +88,7 @@
      
             <div class="post_text">
                 <span class="text"></span>
-                <button id="seeMore">See more</button>
+                <button class="seeMore">See more</button>
             </div>
         </li>
     </template>

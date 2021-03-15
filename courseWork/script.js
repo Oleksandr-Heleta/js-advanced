@@ -1,26 +1,10 @@
 const postForm = document.getElementById('create_post');
 const ulPosts = document.getElementById('post_lists');
-const loadImgBtn = document.getElementById('loadImg')
+const loadImgBtn = document.getElementById('loadImg');
 
 let posts = [];
 let id = 0;
 
-// Отправка в LocalStorage для отображения на страничке (preview post)
-let startPost = [{author: "User1",
-                comments: [{author: "User2",
-                            date: "11/03/2021   12:15",
-                            id: 2,
-                            parentId: 1,
-                            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}],
-                countComments: 1,
-                date: "11/03/2021   12:15",
-                id: 1,
-                imgUrl: "https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg",
-                likes: 6,
-                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }]
-localStorage.setItem('posts', JSON.stringify(startPost));
-localStorage.setItem('idCount', JSON.stringify(10));
 
 // Навешиваем обработчики на форму создания постов и загрузки картинки
 // console.log(postForm.send);
@@ -55,8 +39,9 @@ class Posts  {
     addLike(e) {
         
         this.likes ++;
-        const btn = e.target.parentNode.querySelector('#addLike');
-        btn.innerText = `Likes: ${this.likes}`;
+        const btn = e.target.parentNode.querySelector('.addLike');
+        const span = btn.querySelector('.like_span');
+        span.innerText = this.likes;
         posts.forEach( post => {
             if (post.id === this.id) {
                 post.likes = this.likes;
@@ -64,7 +49,7 @@ class Posts  {
         });
 
         localStorage.setItem('posts', JSON.stringify(posts));
-    };
+    }
 
     // Функция для появления формы коментария
     showForm(e) {
@@ -72,13 +57,13 @@ class Posts  {
         const showForm =  document.getElementById(`create_comment_for${this.id}`);
         // console.log(showForm);
         showForm.style.display = "block";
-    };
+    }
 
     // Функция отображения ПОСТОВ
     render() {
         const t = document.getElementById('renderPost');
         const postListItemId = t.content.querySelector('li');
-              postListItemId.setAttribute('id', this.id)
+              postListItemId.setAttribute('id', this.id);
 
         const author = t.content.querySelector('.author');
               author.textContent = this.author;
@@ -92,8 +77,8 @@ class Posts  {
         const text = t.content.querySelector('.text');
               text.textContent = this.text;
         
-        const like = t.content.querySelector('#addLike');
-              like.textContent = `Likes: ${this.likes}`;
+        const like = t.content.querySelector('.like_span');
+              like.textContent = this.likes;
 
         const commentsCount = t.content.querySelector('.comments_count');
               commentsCount.textContent = `Comments( ${this.countComments} )`;
@@ -107,13 +92,13 @@ class Posts  {
 
         // Навешивание обработчиков на кнопки под постом
         const postListItem = document.getElementById(this.id);
-        const likeBtn = postListItem.querySelector('#addLike');
+        const likeBtn = postListItem.querySelector('.addLike');
               likeBtn.addEventListener('click', this.addLike );
 
         const comentFormBtn = postListItem.querySelector('#openForm');
               comentFormBtn.addEventListener('click', this.showForm);
 
-        const seeMoreBtn = postListItem.querySelector('#seeMore');
+        const seeMoreBtn = postListItem.querySelector('.seeMore');
               seeMoreBtn.addEventListener('click', this.seeMoreFunc);
 
         const commentCreateBtn = postListItem.querySelector('.btn_send');
@@ -122,7 +107,7 @@ class Posts  {
         // Рубаем длинный текст
         this.textCut();
         
-    };
+    }
 
     // Функция создания КОММЕНТАРИЯ
     sendAnswer(e) {
@@ -137,17 +122,17 @@ class Posts  {
         let author = commentForm.author.value;
         let text = commentForm.about.value;
         if(author === "" || text === "") {
-            alert("Please, Write in all inputs!")
+            alert("Please, Write in all inputs!");
             return;
         };
-        let date = getDay()
+        let date = getDay();
         let parentId = this.id;
 
         let comment = new Comment(id, author, text, date, parentId);
         this.comments.push(comment);
         
         // comment.render();
-        commentsCount.innerText = `Comments( ${this.countComments} )`
+        commentsCount.innerText = `Comments( ${this.countComments} )`;
         commentForm.style.display = "none";
         commentForm.about.value = "";
         commentForm.author.value = "";
@@ -160,14 +145,14 @@ class Posts  {
         });
 
         localStorage.setItem('posts', JSON.stringify(posts));
-      };
+      }
 
     //Функция отображения полного текста ПОСТА после обрезки
     seeMoreFunc(e) {
         e.preventDefault();
         const postListItem = document.getElementById(this.id);
         const text = postListItem.querySelector('.text');
-        const seeMoreBtn = postListItem.querySelector('#seeMore');
+        const seeMoreBtn = postListItem.querySelector('.seeMore');
         
         // console.log(seeMoreBtn);
         // console.log(seeMoreBtn.dataset.check);
@@ -181,13 +166,13 @@ class Posts  {
             
         }
        
-    };
+    }
     
     // Функция обрезки текста ПОСТА
     textCut() {
         let text = this.text.trim();
         const postListItem = document.getElementById(this.id);
-        const seeMoreBtn = postListItem.querySelector('#seeMore');
+        const seeMoreBtn = postListItem.querySelector('.seeMore');
         const textSpan = postListItem.querySelector('.text');
 
 
@@ -212,7 +197,7 @@ function createPost(e) {
     let author = postForm.author.value;
     let text = postForm.text.value;
     if(author === "" || text === "") {
-        alert("Please, Write in all inputs!")
+        alert("Please, Write in all inputs!");
         return;
     }
     let date = getDay();
@@ -241,7 +226,7 @@ function getDay()  {
     month++; 
     let year = dateObj.getFullYear();
     let hour = dateObj.getHours();
-    let minutes = dateObj.getMinutes()
+    let minutes = dateObj.getMinutes();
     day = checkDate(day);
     month = checkDate(month);
     hour = checkDate(hour);
@@ -256,7 +241,7 @@ function checkDate(par) {
     if (par < 10) {
         par.toString();
         return `0${par}`; 
-    };
+    }
     return par;
 };
  
@@ -308,23 +293,23 @@ class Comment {
 
         // Добавление Комментарий в список
         let cloneComment = document.importNode(t.content, true);
-        commentList.prepend(cloneComment);;
+        commentList.prepend(cloneComment);
 
         //Навешивание обработчиков на кнопки
-        const seeMoreBtn = commentList.querySelector('#seeMore');
+        const seeMoreBtn = commentList.querySelector('.seeMore');
         seeMoreBtn.addEventListener('click', this.seeMoreFunc);
 
         // Рубаем длинный текст
         this.textCut();
 
-    };
+    }
 
     // Функция отображения полного текста Комментария
     seeMoreFunc(e) {
             e.preventDefault();
             const commentListItem = document.getElementById(this.id);
             const text = commentListItem.querySelector('.text');
-            const seeMoreBtn = commentListItem.querySelector('#seeMore');
+            const seeMoreBtn = commentListItem.querySelector('.seeMore');
             if(seeMoreBtn.dataset.check === 'true') {
                 text.innerText = this.text;
                 seeMoreBtn.innerText = 'See less';
@@ -333,13 +318,13 @@ class Comment {
                 this.textCut();
                 seeMoreBtn.innerText = 'See more';   
             }   
-        };
+        }
 
     // Функция обрезки текста Комментария
     textCut() {
             let text = this.text.trim();
             const commentListItem = document.getElementById(this.id);
-            const seeMoreBtn = commentListItem.querySelector('#seeMore');
+            const seeMoreBtn = commentListItem.querySelector('.seeMore');
             const textSpan = commentListItem.querySelector('.text');
         
             if( text.length <= 500) {
@@ -364,6 +349,24 @@ class Comment {
     if (data !== null) {
         posts = JSON.parse(data);
         return posts;
+    } else {
+    // Отправка в LocalStorage для отображения на страничке (preview post)
+    let startPost = [{author: "User1",
+                    comments: [{author: "User2",
+                                date: "11/03/2021   12:15",
+                                id: 2,
+                                parentId: 1,
+                                text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}],
+                    countComments: 1,
+                    date: "11/03/2021   12:15",
+                    id: 1,
+                    imgUrl: "https://bigenc.ru/media/2016/10/27/1235208547/19117.jpg",
+                    likes: 6,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }];
+        localStorage.setItem('posts', JSON.stringify(startPost));
+        localStorage.setItem('idCount', JSON.stringify(10));
+        GetSavedPosts();
     }
 
     return null;
@@ -377,6 +380,6 @@ class Comment {
           new Posts(post.id, post.author, post.date, post.text, post.imgUrl, post.likes, post.countComments, post.comments);  
           post.comments.forEach(function (comment) {
                 new Comment(comment.id, comment.author, comment.text, comment.date, comment.parentId)
-            })        
-          })   
+            });        
+          });  
    }
