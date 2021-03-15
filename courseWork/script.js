@@ -366,10 +366,10 @@ class Comment {
                     }];
         localStorage.setItem('posts', JSON.stringify(startPost));
         localStorage.setItem('idCount', JSON.stringify(10));
-        GetSavedPosts();
+        id = 10;
+        return startPost;
     }
 
-    return null;
   }
 
 //   Загрузка и отображение постов, которые были в LocalStorage
